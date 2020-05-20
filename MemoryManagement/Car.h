@@ -10,11 +10,11 @@
 
 @interface Car : NSObject
 
-@property (nonatomic, copy) NSString *make;
+@property (nonatomic, copy) NSString *make; // retain: 1
 
 - (instancetype)initWithMake:(NSString *)make;
 
-// TODO: Create an autoreleased class method to create a Car
-
+// Create an autoreleased class method to create a Car
++ (instancetype)carWithMake:(NSString *)make;
 
 @end

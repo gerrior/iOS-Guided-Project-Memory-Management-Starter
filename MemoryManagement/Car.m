@@ -16,25 +16,31 @@
     self = [super init];
     if (self) {
         NSLog(@"-[Car init]: %@", make);
-        _make = [make copy];
+        _make = [make copy]; // retain: 1
     }
     return self;
 }
 
-// TODO: Implement autoreleased class car method
+// Implement autoreleased class car method
++ (instancetype)carWithMake:(NSString *)make {
+    return [[[Car alloc] initWithMake:make] autorelease];
+}
 
 
 - (void)dealloc
 {
     NSLog(@"-[Car dealloc]: %@", self);
-    // TODO: Implement dealloc with MRC
+    // Print self before releasing anything
+    [_make release];
+    
     [super dealloc];
 }
 
 - (NSString *)description
 {
     // TODO: Implement a standard autoreleasing method.
-    NSString *description = [[NSString alloc] initWithFormat:@"Car: %@", self.make];
+    NSString *description = [NSString stringWithFormat:@"Car: %@", self.make];
+//    NSString *description = [[[NSString alloc] initWithFormat:@"Car: %@", self.make] autorelease];
     return description;
 }
 

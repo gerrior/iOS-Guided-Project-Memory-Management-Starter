@@ -27,7 +27,6 @@
 {
     // TODO: Implement dealloc with MRC (order is important)
     [_car release];
-
     NSLog(@"-[Person dealloc]: %@", _car);
     [super dealloc];
 }
@@ -35,8 +34,10 @@
 // TODO: Implement setCar with MRC
 - (void)setCar:(Car *)car
 {
-    [_car release];
-    _car = [car retain];
+    if (car != _car) {
+        [_car release]; // releasing old car
+        _car = [car retain];
+    }
 }
 
 @end
